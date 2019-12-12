@@ -1,0 +1,92 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        <ion-icon name="menu" style="color:#FFF;" id="menu_bar" (click)="menubar()"></ion-icon>
+        <img src="assets/imgs/header_photo.jpg" style="max-width: 90%;" >
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content style="background: #f8f9fa;">
+    
+      <ion-card *ngFor="let item of items; let i = index" (click)="openDetail(item)">
+          <div *ngIf="i == 0 || i == 6 || i == 11 || i == 16 || i == 21 || i == 26 || i == 31 || i == 36 || i == 41
+          || i == 46 || i == 51 || i == 56 || i == 61
+          ; else smallDivs">
+                <div *ngIf="item.featured_media != 0">
+                  <img src="{{ item._embedded['wp:featuredmedia'][0].source_url }}" class="bigImg"/>
+                </div>
+                <ion-card-content>
+                  <ion-badge color="second">
+                      {{ catTitle }}
+                  </ion-badge>
+                      <h5 class="col-12 mt-1 post_title"><b [innerHTML]="item.title.rendered"></b></h5>
+                      <small>
+                        <ion-icon name="time"></ion-icon>
+                        {{ item.date | date : 'h:mm a - EEEE, MMMM d, y' }} . 
+                      <b class="text-green">
+                      {{ item._embedded['author'][0].name }}
+                      </b>
+                      </small>
+                </ion-card-content>
+          </div>
+          <ng-template #smallDivs>
+              <div class="container-fluid pt-1 newsDivt">
+                  <ion-grid>
+                      <ion-row>
+                        <ion-col *ngIf="item.featured_media != 0" col-3 style="display: flex;align-items: center;">
+                          <div class="" id="postimg">
+                                  <img src="{{ item._embedded['wp:featuredmedia'][0].source_url }}" />
+                          </div>
+                        </ion-col>
+                        <ion-col>
+                            <h6 style="text-transform: capitalize"><b>{{ catTitle }}</b> / 
+                              <small>{{ item.date | date : 'h:mm a -  MMM d, yy' }}</small>  
+                            </h6>
+                              <h5 class="col-12 mt-1 post_title"><b [innerHTML]="item.title.rendered"></b></h5>
+                        </ion-col>
+                      </ion-row>
+                  </ion-grid>
+              </div>
+          </ng-template>
+        </ion-card>
+        
+  
+  <div id="chords" *ngIf="!isLoading" style="text-align:center; padding-top: 30px;">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+  
+  <ion-infinite-scroll *ngIf="showLoadMore" (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  
+  
+  </ion-content>
+  <ion-footer>
+    <ion-toolbar>
+  <ion-grid  style="padding:0;">
+    <ion-row style="text-align:center;">
+      <ion-col style="padding:0;">
+      <button ion-button class="footerButtons" (click)="facebook('http://www.facebook.com/802897169886389')">
+          <ion-icon name="logo-facebook" class="iconit" ></ion-icon>
+      </button>
+      </ion-col>
+      <ion-col style="padding:0;">
+      <button ion-button class="footerButtons" (click)="facebook('https://www.youtube.com/channel/UCESI10dvk-qam1rf_jGx1Wg')">
+          <ion-icon name="logo-youtube" class="iconit" ></ion-icon>
+      </button>
+      </ion-col>
+      <ion-col style="padding:0;">
+      <button ion-button class="footerButtons" (click)="facebook('https://twitter.com/gparrotnews')">
+          <ion-icon name="logo-twitter" class="iconit" ></ion-icon>
+      </button>
+      </ion-col>  
+      <ion-col style="padding:0;">
+      <button ion-button class="footerButtons" (click)="facebook('https://www.instagram.com/greenparrot_news/')">
+          <ion-icon name="logo-instagram" class="iconit" ></ion-icon>
+      </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+  

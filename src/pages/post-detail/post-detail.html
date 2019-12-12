@@ -1,0 +1,77 @@
+<!--
+  Generated template for the PostDetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      <img src="assets/imgs/header_photo.jpg" >
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="post" class="selection">
+    <div *ngIf="post.featured_media != 0">
+      <img [src]="post._embedded['wp:featuredmedia'][0].source_url" (click)="viewImage(post._embedded['wp:featuredmedia'][0].source_url)" id="imager" class="col-12" style="display: block;">
+    </div>
+  
+    <div style="padding: 6px;">
+      <h4 [innerHTML]="post.title.rendered" id="postTitle"></h4>
+      <small>
+        <ion-icon name="time"></ion-icon>
+        {{ post.date | date : 'h:mm a - EEEE, MMMM d, y' }} . 
+        <font class="text-warning">{{ post._embedded['author'][0].name }}</font>
+      </small>
+      <div class="post_content">
+        <div [innerHTML]="post.content.rendered"></div>
+      </div>
+    </div>
+    
+    <hr>
+
+
+
+    <div style="padding: 6px;">
+      <code>Related Stories</code><br>
+    
+    
+    <ion-grid  style="padding:0;">
+      <ion-row style="text-align:center;">
+        <ion-col col-6 style="padding:0; color: #000">
+        <div class="relatedblock relateditis" (click)="related(post['jetpack-related-posts'][0].id)">
+            <img [src]="post['jetpack-related-posts'][0].img.src">
+            <font> {{ post['jetpack-related-posts'][0].title }} </font>
+        </div>
+          
+        </ion-col>
+        <ion-col col-6 style="padding:0; color: #000">
+        <div class="relatedblock relateditis" (click)="related(post['jetpack-related-posts'][1].id)">
+            <img [src]="post['jetpack-related-posts'][1].img.src">
+            <font> {{ post['jetpack-related-posts'][1].title }} </font>
+        </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+      
+      
+    </div>	
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+<ion-grid  style="padding:0;">
+  <ion-row style="text-align:center;">
+    <ion-col style="padding:0;">
+		<button ion-button class="footerButtons" (click)="shareit()" style="display:block; width: 100%;">
+			  <ion-icon name="share" class="iconit" ></ion-icon>
+        <font style="margin-left: 10px;">Share</font>
+		</button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+  </ion-toolbar>
+</ion-footer>
