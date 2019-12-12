@@ -1,0 +1,7 @@
+{
+  "name": "greenp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
